@@ -25,9 +25,13 @@ public class HandlingGroupOfElements {
 		for (int i = 0; i < numOfChks; i++) {
 			chks.get(i).click();
 		}
-		
+
 		// Print all link text
-		
+		List<WebElement> allLinks = driver.findElements(By.xpath("//a"));
+		int numOfLinks = allLinks.size();
+		for (int i = 0; i < numOfLinks; i++) {
+			System.out.println(allLinks.get(i).getText());
+		}
 
 	}
 
