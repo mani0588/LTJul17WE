@@ -5,3 +5,5 @@ automation.web.selenium/.classpath
 automation.web.selenium/.project
 automation.web.selenium/.settings/
 target/
+test-output/
+automation.web.selenium/target/classes/META-INF/maven/com.learntek.org/automation.web.selenium/pom.properties
