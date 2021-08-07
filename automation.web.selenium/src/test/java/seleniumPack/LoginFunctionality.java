@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -13,7 +14,6 @@ public class LoginFunctionality {
 
 	WebDriver driver;
 	
-	// data-driven
 	// Test types - Regression, etc
 	// Browser compatability
 	// testng xml
@@ -31,6 +31,20 @@ public class LoginFunctionality {
 		String errorText = loginPage.login(un, pwd).login(un, pwd).login(un, pwd)
 				.getLoginErrorMsg();
 		Assert.assertEquals(errorText, "Incorrect login, please try again.");
+	}
+	
+	@Test(dataProvider="getLoginData")
+	public void verifyLoginForDifferentRoles(String un, String pwd) {
+		LoginPage loginPage = new LoginPage(driver);
+		String errorText = loginPage.login(un, pwd).getLoginErrorMsg();
+		Assert.assertEquals(errorText, "Incorrect login, please try again.");
+	}
+	
+	@DataProvider
+	public Object[][] getLoginData()
+	{
+		Object[][] data = {{"admin", "adminpassword"}, {"operator", "operatorpassword"}, {"user", "userpassword"}};
+		return data;
 	}
 
 	@BeforeMethod // pre-condition to each test case
