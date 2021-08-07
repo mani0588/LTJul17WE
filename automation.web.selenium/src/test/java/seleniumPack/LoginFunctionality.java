@@ -2,13 +2,16 @@ package seleniumPack;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import seleniumPack.LoginPage;
 
 public class LoginFunctionality {
 
@@ -47,10 +50,19 @@ public class LoginFunctionality {
 		return data;
 	}
 
+	@Parameters("browser")
 	@BeforeMethod // pre-condition to each test case
-	public void setup() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+	public void setup(String browser) {
+
+		if (browser.equals("chrome")) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+		}
+		else if (browser.equals("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+		}
+
 		driver.manage().window().maximize();
 		driver.get("https://www.mycontactform.com/samples.php");
 	}
