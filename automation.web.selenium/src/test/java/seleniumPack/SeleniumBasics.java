@@ -45,6 +45,25 @@ public class SeleniumBasics {
 		Thread.sleep(2000);
 		driver.navigate().refresh();
 		Thread.sleep(2000);
+		
+		//gettext and getattribute
+		String visbleText = driver.findElement(By.linkText("Business Contact Form")).getText();
+		System.out.println(visbleText);
+		
+		String hrefAtt = driver.findElement(By.linkText("Business Contact Form")).getAttribute("href");
+		System.out.println(hrefAtt);
+		
+		
+		driver.findElement(By.id("subject")).sendKeys("read test from text box");
+		System.out.println(driver.findElement(By.id("subject")).getText());
+		System.out.println(driver.findElement(By.id("subject")).getAttribute("value"));
+		
+		// <a href="https://www.mycontactform.com/samples/businesscontact.php">Business Contact Form</a>
+		// <input name="subject" type="text" required="required"></input>
+		
+		
+		
+		
 
 		driver.close();
 	}
